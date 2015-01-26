@@ -1,5 +1,11 @@
 # to update: cat $HOME/lib/plumbing | 9p write plumb/rules
 
 editor = acme
-include basic
 
+# git commits
+type is text
+data matches 'commit ([a-zA-Z0-9]+)'
+plumb start rc -c 'cd '$wdir' && git show '$1' | plumb -i -d edit -a ''action=showdata filename=/git/'$1''''
+# plumb start rc -c 'cd '$wdir' && git show '$1' | plumb -i -d edit -a ''action=showdata filename=/git/'$1''''
+
+include basic
