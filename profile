@@ -17,6 +17,7 @@ fn gd{git diff $*}
 fn gc{git commit $*}
 fn gca{gc -a $*}
 fn ga{git add $*}
+fn gl{git log $*}
 fn gp{git push -q $*}
 fn gu{
 	git diff-index --quiet HEAD --
