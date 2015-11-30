@@ -1,21 +1,27 @@
 EDITOR=E
 editor=$EDITOR
-
+plan9=$PLAN9
+path=(. $plan9/bin $path)
+shell=rc
+SHELL=$shell
+font=/mnt/font/LucidaGrande/14a/font
 PAGER=nobs
 
-plan9=/Users/iv/src/plan9port
-path=($plan9/bin $path)
+plumber
+fontsrv &
 
 fn %{$*}
 
-fn ga{git add $*}
-fn gs{git status -bs $*}
-fn gp{git push -q $*}
-fn gu{git up -q $*}
-fn gl{git log $*}
+fn gs{git status -sb $*}
 fn gd{git diff $*}
-fn gc{git commit -v $*}
-fn gg{git log --graph --oneline --decorate $*}
-
-fn f{git grep -n $*}
-fn ff{f '^'$*}
+fn gc{git commit $*}
+fn gca{gc -a $*}
+fn ga{git add $*}
+fn gp{git push -q $*}
+fn gu{
+	git diff-index --quiet HEAD --
+	s=$status
+	if(! ~ s '') git stash -q
+	git pull --rebase
+	if(! ~ s '') git stash pop -q
+}
