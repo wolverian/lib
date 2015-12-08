@@ -7,7 +7,7 @@ SHELL=$shell
 font=/mnt/font/LucidaGrande/14a/font
 PAGER=nobs
 
-GOVENDOREXPERIMENT=1
+GO15VENDOREXPERIMENT=1
 
 plumber
 fontsrv &
